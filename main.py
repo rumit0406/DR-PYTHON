@@ -1,5 +1,8 @@
 from tkinter import *
 import pandas as pd
+from tkinter import messagebox
+from PIL import Image, ImageTk
+
 
 def isnan(str) : 
     return str != str
@@ -29,9 +32,9 @@ def out() :
             mostProbable.append(key)
         elif val == maxfreq - 1 :
             lessProbable.append(key)
-        
-    print(mostProbable)
-    print(lessProbable)
+    freq.clear()
+    messagebox.showinfo(message="MOST PROBABLE ARE:  " + str(mostProbable))
+    messagebox.showinfo(message="SOME OTHER POSSIBILITES ARE: " + str(lessProbable))
 
 #graph reading
 graph = pd.read_csv("datacsv.csv").values
@@ -47,13 +50,28 @@ for i in range(n) :
 user = []
 root = Tk()
 root.title("Disease Predictor")
+root.geometry("1200x1200")
+root.configure(background = "black")
+root.iconbitmap("health.ico")
+my_label = Label(root , text= "Which SYMPTOMS do you have??",font = ('Arial',15), fg= "#0D0D4F",  bg="#E7EA13").pack(side = TOP ,fill = X,expand = 2)
+
+
+
+logo = Image.open('doct.jpg')
+logo = ImageTk.PhotoImage(logo)
+logo_label = Label(image=logo)
+logo_label.image = logo
+logo_label.pack(side= LEFT, padx = 30, pady =40)
+
+
+
 var = dict()
 
 for i in symptoms :
     var[i] = IntVar()
-    chk = Checkbutton(root, text = i, variable = var[i], width = 20)
-    chk.pack()
+    chk = Checkbutton(root, text = i, variable = var[i], width = 15, fg= "#FAE82B",  bg="#872919")
+    chk.pack(side = TOP , fill=Y)
     
-sub = Button(root, text = "submit", command = out)
-sub.pack()
+sub = Button(root, text = "Submit",command = out, font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
+sub.pack(side = BOTTOM, fill = Y)
 root.mainloop()
