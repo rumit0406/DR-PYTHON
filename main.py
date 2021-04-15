@@ -32,9 +32,12 @@ def out() :
             mostProbable.append(key)
         elif val == maxfreq - 1 :
             lessProbable.append(key)
+        val = 0
         
     messagebox.showinfo(message="MOST PROBABLE ARE:  " + str(mostProbable))
     messagebox.showinfo(message="SOME OTHER POSSIBILITES ARE: " + str(lessProbable))
+    mostProbable.clear()
+    lessProbable.clear()
 
 #graph reading
 graph = pd.read_csv("datacsv.csv").values
